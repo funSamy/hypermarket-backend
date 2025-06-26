@@ -1,0 +1,155 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String               @id @default(uuid()) @db.Uuid
+  name                String
+  email               String               @unique
+  passwordHash        String               @map("password_hash")
+  phone               String
+  role                Role                 @default(CUSTOMER)
+  cartItems           CartItem[]
+  orders              Order[]
+  passwordResetTokens PasswordResetToken[]
+
+  @@map("users")
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  token     String   @unique
+  userId    String   @map("user_id") @db.Uuid
+  expiresAt DateTime @map("expires_at")
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("password_reset_tokens")
+}
+
+model Product {
+  id          String      @id @default(uuid()) @db.Uuid
+  name        String
+  description String
+  price       Float
+  image       String[]
+  categoryId  String      @map("category_id") @db.Uuid
+  cartItems   CartItem[]
+  inventories Inventory[]
+  orderItems  OrderItem[]
+  category    Category    @relation(fields: [categoryId], references: [id])
+
+  @@map("products")
+}
+
+model Category {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  image       String?
+  products    Product[]
+
+  @@map("categories")
+}
+
+model CartItem {
+  id        String  @id @default(uuid()) @db.Uuid
+  quantity  Int
+  userId    String  @map("user_id") @db.Uuid
+  productId String  @map("product_id") @db.Uuid
+  product   Product @relation(fields: [productId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
+
+  @@map("cart_items")
+}
+
+model Order {
+  id          String      @id @default(uuid()) @db.Uuid
+  orderDate   DateTime    @default(now()) @map("order_date")
+  totalAmount Float       @map("total_amount")
+  status      OrderStatus @default(PENDING_PAYMENT)
+  userId      String      @map("user_id") @db.Uuid
+  items       OrderItem[]
+  user        User        @relation(fields: [userId], references: [id])
+  payment     Payment?
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(uuid()) @db.Uuid
+  quantity  Int
+  unitPrice Float   @map("unit_price")
+  orderId   String  @map("order_id") @db.Uuid
+  productId String  @map("product_id") @db.Uuid
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+model Payment {
+  id          String        @id @default(uuid()) @db.Uuid
+  method      PaymentMethod
+  status      PaymentStatus @default(PENDING)
+  transaction String        @unique
+  paidAt      DateTime?     @map("paid_at")
+  orderId     String        @unique @map("order_id") @db.Uuid
+  order       Order         @relation(fields: [orderId], references: [id])
+
+  @@map("payments")
+}
+
+model Warehouse {
+  id          String      @id @default(uuid()) @db.Uuid
+  name        String
+  latitude    Float
+  longitude   Float
+  capacity    Int
+  inventories Inventory[]
+
+  @@map("warehouses")
+}
+
+model Inventory {
+  id          String    @id @default(uuid()) @db.Uuid
+  quantity    Int
+  warehouseId String    @map("warehouse_id") @db.Uuid
+  productId   String    @map("product_id") @db.Uuid
+  product     Product   @relation(fields: [productId], references: [id])
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
+
+  @@map("inventories")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELED
+  FAILED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  MOMO
+  COD
+}
