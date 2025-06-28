@@ -1,0 +1,139 @@
+Folder PATH listing for volume FASTER
+Volume serial number is 5EF7-C4BA
+E:backend
+|   app.controller.spec.ts
+|   app.controller.ts
+|   app.module.ts
+|   app.service.ts
+|   main.ts
+|   x.txt
+|   
++---auth
+|   |   auth.controller.ts
+|   |   auth.module.ts
+|   |   auth.service.ts
+|   |   
+|   +---decorators
+|   |       roles.decorator.ts
+|   |       user.decorator.ts
+|   |       
+|   +---dto
+|   |       auth-response.dto.ts
+|   |       forgot-password.dto.ts
+|   |       login-user.dto.ts
+|   |       register-user.dto.ts
+|   |       reset-password.dto.ts
+|   |       user.dto.ts
+|   |       
+|   +---guards
+|   |       jwt-auth.guard.ts
+|   |       roles.guard.ts
+|   |       
+|   +---strategies
+|   |       jwt.strategy.ts
+|   |       
+|   \---types
+|           user-request.d.ts
+|           
++---cart
+|   |   cart.controller.ts
+|   |   cart.module.ts
+|   |   cart.service.ts
+|   |   
+|   \---dto
+|           add-to-cart.dto.ts
+|           cart-item-response.dto.ts
+|           cart-item.dto.ts
+|           cart-response.dto.ts
+|           cart.dto.ts
+|           
++---categories
+|   |   categories.controller.ts
+|   |   categories.module.ts
+|   |   categories.service.ts
+|   |   
+|   \---dto
+|           categories-list-response.dto.ts
+|           category-response.dto.ts
+|           category.dto.ts
+|           create-category.dto.ts
+|           update-category.dto.ts
+|           
++---common
+|   +---dto
+|   |       error-response.dto.ts
+|   |       
+|   +---filters
+|   |       http-exception.filter.ts
+|   |       
+|   +---interceptors
+|   |       response.interceptor.ts
+|   |       
+|   \---services
+|           prisma.service.ts
+|           
++---notifications
+|       notifications.module.ts
+|       notifications.service.ts
+|       
++---orders
+|   |   orders.controller.ts
+|   |   orders.module.ts
+|   |   orders.service.ts
+|   |   
+|   +---dto
+|   |       create-order.dto.ts
+|   |       order-item.dto.ts
+|   |       order-response.dto.ts
+|   |       order-statistics-response.dto.ts
+|   |       order.dto.ts
+|   |       orders-list-response.dto.ts
+|   |       update-order-status.dto.ts
+|   |       
+|   \---services
+|           fulfillment.service.ts
+|           
++---payments
+|   |   payments.controller.ts
+|   |   payments.module.ts
+|   |   payments.service.ts
+|   |   
+|   +---dto
+|   |       initiate-payment.dto.ts
+|   |       payment-history-response.dto.ts
+|   |       payment-providers-response.dto.ts
+|   |       payment-response.dto.ts
+|   |       payment-verification-response.dto.ts
+|   |       webhook-payload.dto.ts
+|   |       
+|   \---services
+|           fapshi.service.ts
+|           
++---products
+|   |   products.controller.ts
+|   |   products.module.ts
+|   |   products.service.ts
+|   |   
+|   \---dto
+|           create-product.dto.ts
+|           filter-products.dto.ts
+|           product-response.dto.ts
+|           product.dto.ts
+|           products-list-response.dto.ts
+|           update-product.dto.ts
+|           
+\---warehouse
+    |   index.ts
+    |   inventory.controller.ts
+    |   inventory.service.ts
+    |   warehouse.controller.ts
+    |   warehouse.module.ts
+    |   warehouse.service.ts
+    |   
+    \---dto
+            adjust-inventory.dto.ts
+            create-warehouse.dto.ts
+            inventory-response.dto.ts
+            update-warehouse.dto.ts
+            warehouse-response.dto.ts
+            

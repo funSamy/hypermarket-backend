@@ -429,8 +429,8 @@ All notable changes to the Hypermarket Backend API will be documented in this fi
 - **Service Integration**: All modules load and initialize correctly
 - **API Routing**: All endpoints properly mapped and accessible
 - **Resend Initialization**: Email service configured and ready
-- **Development Server**: Successfully running on http://localhost:3001/api
-- **API Documentation**: Updated Swagger docs available at http://localhost:3001/api/docs
+- **Development Server**: Successfully running on <http://localhost:3001/api>
+- **API Documentation**: Updated Swagger docs available at <http://localhost:3001/api/docs>
 
 ### Current Status: 100% Complete ✅
 
@@ -611,19 +611,21 @@ The Hypermarket Backend API now includes **complete warehouse and inventory mana
 #### Build System Validation ✅
 
 - **Successful Compilation**: Application now compiles without any TypeScript errors
-- **Development Server**: Successfully starts and runs on http://localhost:3001/api
-- **API Documentation**: Swagger UI remains fully functional at http://localhost:3001/api/docs
+- **Development Server**: Successfully starts and runs on <http://localhost:3001/api>
+- **API Documentation**: Swagger UI remains fully functional at <http://localhost:3001/api/docs>
 - **Route Mapping**: All warehouse and inventory endpoints properly mapped and accessible
 
 #### Fixed Error Details
 
 **Before Fix**: 10 TypeScript compilation errors
+
 ```
 src/warehouse/inventory.controller.ts:82:9 - error TS2353: Object literal may only specify known properties, and 'description' does not exist in type 'ApiResponseExamples'.
 src/warehouse/warehouse.controller.ts:86:9 - error TS2353: Object literal may only specify known properties, and 'description' does not exist in type 'ApiResponseExamples'.
 ```
 
 **After Fix**: 0 TypeScript compilation errors
+
 ```
 [11:50:29 AM] Starting compilation in watch mode...
 [11:50:37 AM] Found 0 errors. Watching for file changes.
